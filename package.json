@@ -1,0 +1,34 @@
+{
+  "name": "broccoli-scss-lint",
+  "version": "0.0.1",
+  "description": "Broccoli plugin for validate .scss files",
+  "main": "index.js",
+  "author": {
+    "name": "Alexander Tarasyuk",
+    "email": "alexander.v.tarasyuk@gmail.com"
+  },
+  "dependencies": {
+    "broccoli-filter": "^0.1.6",
+    "colors": "^0.6.2",
+    "shelljs": "^0.3.0",
+    "walk-sync": "^0.1.2",
+    "promise-map-series": "^0.2.0",
+    "mkdirp": "^0.5.0",
+    "broccoli-kitchen-sink-helpers": "^0.2.2"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a-tarasyuk/broccoli-scss-lint"
+  },
+  "keywords": [
+    "broccoli-plugin",
+    "scss-lint",
+    "scss",
+    "validation"
+  ],
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/a-tarasyuk/broccoli-scss-lint/issues"
+  }
+}
