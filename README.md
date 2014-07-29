@@ -21,10 +21,10 @@ Default: `''`
 Specify a configuration file to use
 
 #### format
-Type: `String`  
+Type: `String` | `Array`   
 Default: `Default`
 
-Output format (xml, config). If value of this option equals xml, option 'reportFile' cannot be empty
+Output format (xml, config). If value of this option equals xml, option 'reportFile' cannot be empty. Also you can set format as array (['xml', 'default'], ['config', 'default'], ['config', 'default', 'xml']) in order to see errors in console and save result in xml file.  
 
 #### reportFile
 Type: `String`  
@@ -57,4 +57,5 @@ files = scssLint(tree, {
 
 ### Release History
 
+0.0.2 - Added opportunity set format as array, fix bugs.
 0.0.1 - First release

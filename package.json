@@ -14,7 +14,7 @@
     "walk-sync": "^0.1.2",
     "promise-map-series": "^0.2.0",
     "mkdirp": "^0.5.0",
-    "broccoli-kitchen-sink-helpers": "^0.2.2"
+    "rsvp": "^3.0.3"
   },
   "license": "MIT",
   "repository": {

@@ -2,7 +2,8 @@ var Filter    = require('broccoli-filter'),
     walkSync  = require('walk-sync'),
     mapSeries = require('promise-map-series'),
     mkdirp    = require('mkdirp'),
-    helpers = require('broccoli-kitchen-sink-helpers'),
+    Promise   = require('rsvp').Promise,
+    fs        = require('fs'),
     _SCSSLint = require('./lib/scss-lint');
 
 /**
@@ -22,11 +23,10 @@ function SCSSLint(inputTree, options) {
   this.options   = options;
   
   this.options.config     = this.options.config || '';
-  this.options.format     = (this.options.format || 'default').toLowerCase();
+  this.options.format     = _SCSSLint.format(this.options.format);
   this.options.reportFile = this.options.reportFile || '';
 
   _SCSSLint.validate(this.options);
-  _SCSSLint.before(this.options);
 }
 
 SCSSLint.prototype                 = Object.create(Filter.prototype);
@@ -40,19 +40,19 @@ SCSSLint.prototype.targetExtension = 'scss';
  * @param {String} content
  * @param {String} path
  * 
- * @return undefined
+ * @return {String} | null
  */
 SCSSLint.prototype.processString = function (content, filePath) {
-  _SCSSLint.lint(this.inputTree.tmpDestDir, filePath, this.options);
+  return (!_SCSSLint.lint(this.inputTree.tmpDestDir, filePath, this.options)) ? content : null;
 };
 
 /**
- * after
+ * finish
  *
  * @return undefined
  */
-SCSSLint.prototype.after = function () {
-  _SCSSLint.after(this.options);  
+SCSSLint.prototype.finish = function () {
+  _SCSSLint.finish(this.options);  
 };
 
 /**
@@ -65,7 +65,7 @@ SCSSLint.prototype.after = function () {
  */
 SCSSLint.prototype.write = function (readTree, destDir) {
   var self = this;
-    
+  
   return readTree(this.inputTree).then(function (srcDir) {
     var paths = walkSync(srcDir);
 
@@ -80,9 +80,40 @@ SCSSLint.prototype.write = function (readTree, destDir) {
         }
       }
     }).then(function () {
-      self.after();
+      self.finish();
     });
   })
+}
+
+/**
+ * processFile
+ *
+ * @param {Object} srcDir
+ * @param {String} destDir
+ * @param {String} relativePath
+ * 
+ * @return {Object}
+ */
+SCSSLint.prototype.processFile = function (srcDir, destDir, relativePath) {
+  var self   = this,
+      string = fs.readFileSync(srcDir + '/' + relativePath, {encoding: 'utf8'}),
+      file   = self.getDestFilePath(relativePath); 
+  
+  return Promise.resolve(self.processString(string, relativePath))
+    .then(function (outputString) {
+      if (!outputString) {
+        return null;  
+      }
+
+      fs.writeFileSync(destDir + '/' + file, outputString, {encoding: 'utf8'});
+      
+      return file;
+    })
+    .then(function (file) {
+      return {
+        outputFiles: (file) ? [file] : []
+      }
+    });
 }
 
 module.exports = SCSSLint;
