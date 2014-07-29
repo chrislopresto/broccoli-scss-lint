@@ -9,7 +9,7 @@
 
 ### Installation
 ```shell
-nmp install broccoli-scss-lint 
+npm install broccoli-scss-lint 
 ```
 
 ### Options
