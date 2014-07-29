@@ -58,4 +58,5 @@ files = scssLint(tree, {
 ### Release History
 
 0.0.2 - Added opportunity set format as array, fix bugs.
+
 0.0.1 - First release
