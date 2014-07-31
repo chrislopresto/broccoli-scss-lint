@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "broccoli-filter": "^0.1.6",
+    "broccoli-kitchen-sink-helpers": "^0.2.0",
     "colors": "^0.6.2",
     "shelljs": "^0.3.0",
     "walk-sync": "^0.1.2",

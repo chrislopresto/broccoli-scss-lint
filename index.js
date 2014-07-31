@@ -1,6 +1,7 @@
 var Filter    = require('broccoli-filter'),
     walkSync  = require('walk-sync'),
     mapSeries = require('promise-map-series'),
+    helpers   = require('broccoli-kitchen-sink-helpers'),
     mkdirp    = require('mkdirp'),
     Promise   = require('rsvp').Promise,
     fs        = require('fs'),
