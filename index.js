@@ -26,6 +26,7 @@ function SCSSLint(inputTree, options) {
   this.options.config     = this.options.config || '';
   this.options.format     = _SCSSLint.format(this.options.format);
   this.options.reportFile = this.options.reportFile || '';
+  this.options.bundleExec = this.options.bundleExec || false;
 
   _SCSSLint.validate(this.options);
 }
