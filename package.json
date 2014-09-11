@@ -1,6 +1,6 @@
 {
   "name": "broccoli-scss-lint",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Broccoli plugin for validate .scss files",
   "main": "index.js",
   "author": {
