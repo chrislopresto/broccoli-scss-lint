@@ -45,7 +45,8 @@ SCSSLint.prototype.targetExtension = 'scss';
  * @return {String} | null
  */
 SCSSLint.prototype.processString = function (content, filePath) {
-  return (!_SCSSLint.lint(this.inputTree.tmpDestDir, filePath, this.options)) ? content : null;
+  var destDir = this.inputTree.tmpDestDir || this.inputTree.destDir;
+  return (!_SCSSLint.lint(destDir, filePath, this.options)) ? content : null;
 };
 
 /**
